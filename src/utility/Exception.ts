@@ -34,7 +34,7 @@ export default class Exception {
    * @param stacktrace Stacktrace of the error.
    * @returns Instance of {@link IException}
    */
-  static mandatory(method?: string, parameter?: string): IException {
+  static mandatory(parameter?: string): IException {
     let message = 'The input object parameter is mandatory';
 
     if (message) {

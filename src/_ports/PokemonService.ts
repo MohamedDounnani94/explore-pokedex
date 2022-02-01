@@ -1,26 +1,15 @@
 import IPokemon from '../models/Pokemon';
 import PokemonDomain from '../_domains/PokemonDomain';
+import Exception from '../utility/Exception';
 
 export default class PokemonService {
-  /**
-   * Service that returns a pokemon object by submitting name.
-   * @param name The name of the pokemon eg. mewtwo.
-   * @returns Object {@link IPokemon}.
-   * @throws {@link IException}.
-  */
   static async getPokemonByName(name: string): Promise<IPokemon> {
-    // VALIDATION
+    if (!name) throw Exception.mandatory('name');
     return PokemonDomain.getPokemonByName(name);
   }
 
-  /**
-   * Service that returns a pokemon object with a funny description by submitting name.
-   * @param name The name of the pokemon eg. mewtwo.
-   * @returns Object {@link IPokemon}.
-   * @throws {@link IException}.
-  */
   static async getTranslatedPokemonByName(name: string): Promise<IPokemon> {
-    // VALIDATION
+    if (!name) throw Exception.mandatory('name');
     return PokemonDomain.getTranslatedPokemonByName(name);
   }
 }
