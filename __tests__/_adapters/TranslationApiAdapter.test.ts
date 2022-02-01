@@ -53,4 +53,18 @@ describe("TranslationAdapter get methods: ", () => {
     }
   });
 
+  test('Should build yoda route', () => {
+    const yoda = 'yoda'
+    const yodaRoute = 'https://api.funtranslations.com/translate/yoda'
+    const route = TranslationApiAdapter.buildEndpoint(yoda)
+    expect(route).toEqual(yodaRoute)
+  })
+
+  test('Should build shakespeare route', () => {
+    const shakespeare = 'shakespeare'
+    const shakespeareRoute = 'https://api.funtranslations.com/translate/shakespeare'
+    const route = TranslationApiAdapter.buildEndpoint(shakespeare)
+    expect(route).toEqual(shakespeareRoute)
+  })
+
 });

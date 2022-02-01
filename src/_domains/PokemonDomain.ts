@@ -5,11 +5,13 @@ import { TranslateAuthor } from '../models/Translation';
 
 export default class PokemonDomain {
   static async getPokemonByName(name: string): Promise<IPokemon> {
-    return PokemonRepository.getPokemonByName(name);
+    const lowerName = name.toLowerCase();
+    return PokemonRepository.getPokemonByName(lowerName);
   }
 
   static async getTranslatedPokemonByName(name: string): Promise<IPokemon> {
-    const pokemon = await PokemonRepository.getPokemonByName(name);
+    const lowerName = name.toLowerCase();
+    const pokemon = await PokemonRepository.getPokemonByName(lowerName);
 
     if (pokemon.habitat === 'cave' || pokemon.isLegendary) {
       pokemon.description = await this.getDescription(TranslateAuthor.YODA, pokemon.description);

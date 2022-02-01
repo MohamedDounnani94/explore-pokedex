@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { IPokemonResponse } from '../models/Pokemon';
 import Exception from '../utility/Exception';
 import logger from '../utility/logger';
 
 const POKEMON_BASE_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon-species';
 
 export default class PokemonAdapter {
-  static async getPokemonByName(name: string): Promise<any> {
+  static async getPokemonByName(name: string): Promise<IPokemonResponse> {
     const pokemonEndpoint = `${POKEMON_BASE_ENDPOINT}/${name}`;
     try {
       logger.debug(`Start to call the pokemon endpoint: ${pokemonEndpoint}`);

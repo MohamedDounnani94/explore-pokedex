@@ -34,4 +34,20 @@ describe("PokemonRepository get methods: ", () => {
     expect(_pokemon).toMatchObject(pokemon)
   });
 
+  test('Should return a Pokemon pedigree with empty keys when description or habitat are not provided', async () => {
+
+    const pokemonName = 'MeoTwo';
+
+    const pokemonResult = {
+      name: 'MeoTwo',
+      is_legendary: true,
+    }
+
+    pokemonApiAdapter.getPokemonByName.mockResolvedValue(pokemonResult);
+
+    const _pokemon = await PokemonRepository.getPokemonByName(pokemonName)
+    expect(_pokemon.description).toEqual('')
+    expect(_pokemon.habitat).toEqual('')
+  });
+
 });

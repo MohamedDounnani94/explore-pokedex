@@ -10,7 +10,7 @@
     "lint-fix": "eslint ./src --fix --ext .ts --ext .js",
     "watch": "nodemon -r dotenv/config ./src/server.ts dotenv_config_path=.env | pino-pretty",
     "clean": "rimraf build/*",
-    "build": "tsc --build --verbose"
+    "build": "npm run clean && tsc --build --verbose"
   },
   "author": "MohamedDounnani",
   "license": "MIT",
