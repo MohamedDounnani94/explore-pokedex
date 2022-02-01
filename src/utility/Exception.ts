@@ -1,7 +1,7 @@
 /**
  * Define the basic fields for an exception.
  */
- export interface IException {
+export interface IException {
   code: string;
   message: string;
   stacktrace?: any;

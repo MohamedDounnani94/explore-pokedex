@@ -1,4 +1,3 @@
-
 import IPokemon from '../models/Pokemon';
 import PokemonApiAdapter from '../_adapters/PokemonApiAdapter';
 
