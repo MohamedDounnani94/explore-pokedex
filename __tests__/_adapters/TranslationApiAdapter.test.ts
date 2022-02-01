@@ -1,5 +1,10 @@
+import axios from 'axios'
 import { TranslateAuthor } from "../../src/models/Translation";
 import TranslationApiAdapter from "../../src/_adapters/TranslationApiAdapter";
+
+jest.mock('axios');
+
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("TranslationAdapter get methods: ", () => {
 
@@ -8,14 +13,44 @@ describe("TranslationAdapter get methods: ", () => {
     const description = 'Hold my beer';
     const from_who = TranslateAuthor.YODA
 
-    const translation = {
-      translated: 'Force be with you from the other side',
-      text: 'hello from the other side',
-      translation: 'yoda'
+    const response = {
+      success: {
+          total: 1
+      },
+      contents: {
+          translated: "My beer,  hold",
+          text: "Hold my beer",
+          translation: "yoda"
+      }
     }
 
-    const _translation = await TranslationApiAdapter.getFunnyDescription(description, from_who)
-    expect(_translation).toMatchObject(translation)
+    mockedAxios.post.mockImplementationOnce(() => Promise.resolve({
+      data: {
+        ...response  
+      }
+    }));
+
+    const translation = await TranslationApiAdapter.getFunnyDescription(from_who, description)
+    expect(translation.contents.translation).toEqual(from_who)
+    expect(translation.contents.text).toEqual(description)
+    expect(translation.contents.translated).toEqual('My beer,  hold')
+    expect(translation.success.total).toEqual(1)
+  });
+
+  test('Should return a handle rejection', async () => {
+
+    const description = '';
+    const from_who = TranslateAuthor.YODA
+
+    mockedAxios.post.mockImplementationOnce(() => Promise.reject({
+      status: 500
+    }));
+
+    try {
+      await TranslationApiAdapter.getFunnyDescription(from_who, description)
+    } catch (expection) {
+      expect(expection.code).toEqual("500")
+    }
   });
 
 });

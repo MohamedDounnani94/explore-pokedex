@@ -3,8 +3,17 @@ export enum TranslateAuthor {
   SHAKESPEARE = 'shakespeare',
 }
 
-export default interface ITranslation {
+interface Translator {
   translated: string;
   text: string;
   translation: string;
+}
+
+interface Success {
+  total: string;
+}
+
+export interface ITranslatorResponse {
+  success: Success;
+  contents: Translator;
 }
