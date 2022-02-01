@@ -1,33 +1,24 @@
-import IPokemon from '../models/Pokemon';
+import axios from 'axios';
+import Exception from '../utility/Exception';
 import logger from '../utility/logger';
 
-const POKEMON_BASE_ENDPOINT = 'https://pokeapi.co';
+const POKEMON_BASE_ENDPOINT = 'https://pokeapi.co/api/v2/pokemon-species';
 
 export default class PokemonAdapter {
-  /**
-   * Adapter function that returns a pokemon object.
-   * @param name The name of the pokemon {@link IPokemon}.
-   * @returns Object {@link IPokemon}.
-   * @throws {@link IException}.
-  */
-  static async getPokemonByName(name: string): Promise<IPokemon> {
-    this.getPokemonNameByRoute(name);
-
-    return {
-      name: 'MeoTwo',
-      description: 'It was created by a scientist',
-      habitat: 'rare',
-      isLegendary: true,
-    };
-  }
-
-  /**
-   * Adapter function that submit a request to an endpoint to get a pokemon.
-   * @param route aka the pokemon name, that you want to call to get the pokemon informations.
-   * @throws {@link IException}.
-  */
-  static async getPokemonNameByRoute(route: string): Promise<any> {
-    const pokemonEndpoint = `${POKEMON_BASE_ENDPOINT}/${route}`;
-    logger.debug({ pokemonEndpoint });
+  static async getPokemonByName(name: string): Promise<any> {
+    const pokemonEndpoint = `${POKEMON_BASE_ENDPOINT}/${name}`;
+    try {
+      logger.debug(`Start to call the pokemon endpoint: ${pokemonEndpoint}`);
+      const { data } = await axios.get(pokemonEndpoint);
+      return data;
+    } catch (exception) {
+      if (exception.response.status === 404) {
+        logger.error(`Error in api call with status ${exception.response.status}`);
+        throw Exception.notFound('pokemon');
+      } else {
+        logger.error('Error in api call something goes wrong');
+        throw Exception.generic();
+      }
+    }
   }
 }

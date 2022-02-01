@@ -68,10 +68,10 @@ export default class Exception {
    * @param objectId   Id of the object.
    * @returns Object {@link IException}
    */
-  static notFound(objectName: string, objectId: string): IException {
+  static notFound(objectName: string): IException {
     return new SException({
       code: '404',
-      message: `The ${objectName} with id "${objectId}" was not found`,
+      message: `The ${objectName} was not found`,
     });
   }
 }
