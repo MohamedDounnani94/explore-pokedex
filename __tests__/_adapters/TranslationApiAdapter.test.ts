@@ -11,7 +11,7 @@ describe("TranslationAdapter get methods: ", () => {
   test('Should return a Translation object', async () => {
 
     const description = 'Hold my beer';
-    const from_who = TranslateAuthor.YODA
+    const fromWho = TranslateAuthor.YODA
 
     const response = {
       success: {
@@ -30,8 +30,8 @@ describe("TranslationAdapter get methods: ", () => {
       }
     }));
 
-    const translation = await TranslationApiAdapter.getFunnyDescription(from_who, description)
-    expect(translation.contents.translation).toEqual(from_who)
+    const translation = await TranslationApiAdapter.getFunnyDescription(fromWho, description)
+    expect(translation.contents.translation).toEqual(fromWho)
     expect(translation.contents.text).toEqual(description)
     expect(translation.contents.translated).toEqual('My beer,  hold')
     expect(translation.success.total).toEqual(1)
@@ -40,14 +40,14 @@ describe("TranslationAdapter get methods: ", () => {
   test('Should return a handle rejection', async () => {
 
     const description = '';
-    const from_who = TranslateAuthor.YODA
+    const fromWho = TranslateAuthor.YODA
 
     mockedAxios.post.mockImplementationOnce(() => Promise.reject({
       status: 500
     }));
 
     try {
-      await TranslationApiAdapter.getFunnyDescription(from_who, description)
+      await TranslationApiAdapter.getFunnyDescription(fromWho, description)
     } catch (expection) {
       expect(expection.code).toEqual("500")
     }

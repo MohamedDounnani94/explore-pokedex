@@ -6,8 +6,8 @@ import Exception from '../utility/Exception';
 const TRANSLATION_BASE_ENDPOINT = 'https://api.funtranslations.com/translate';
 
 export default class TranslationAdapter {
-  static async getFunnyDescription(from_who: string, text: string): Promise<ITranslatorResponse> {
-    const route = from_who === TranslateAuthor.SHAKESPEARE ? TranslateAuthor.SHAKESPEARE : TranslateAuthor.YODA;
+  static async getFunnyDescription(fromWho: string, text: string): Promise<ITranslatorResponse> {
+    const route = fromWho === TranslateAuthor.SHAKESPEARE ? TranslateAuthor.SHAKESPEARE : TranslateAuthor.YODA;
 
     const translationEndpoint = `${TRANSLATION_BASE_ENDPOINT}/${route}`;
     try {

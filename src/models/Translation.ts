@@ -10,7 +10,7 @@ interface Translator {
 }
 
 interface Success {
-  total: string;
+  total: number;
 }
 
 export interface ITranslatorResponse {
