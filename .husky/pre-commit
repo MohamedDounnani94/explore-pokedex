@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# SCRIPT THAT RUNS LINT
+npm run lint-fix
+
+# SCRIPT THAT RUNS TESTS
+npm test
+
+# SCRIPT THAT CONTROL COMMIT LINT
+npx --no -- commitlint --edit

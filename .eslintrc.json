@@ -1,0 +1,40 @@
+{
+  "env": {
+      "browser": true,
+      "es2021": true
+  },
+  "extends": [
+      "airbnb-base",
+      "airbnb-typescript/base"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "project": [
+          "./tsconfig.json",
+          "./babel.config.js",
+          "./jest.config.js"
+      ]
+  },
+  "plugins": [
+      "@typescript-eslint"
+  ],
+  "rules": {
+      "no-plusplus": [
+          "error",
+          {
+              "allowForLoopAfterthoughts": true
+          }
+      ],
+      "@typescript-eslint/no-throw-literal": [
+          "off"
+      ],
+      "no-underscore-dangle": "off",
+      "@typescript-eslint/no-unused-vars": [
+          "warn"
+      ],
+      "max-classes-per-file": [
+          "off"
+      ],
+      "max-len": "off"
+  }
+} 
