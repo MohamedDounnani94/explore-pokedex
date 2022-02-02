@@ -5,6 +5,17 @@
 A simple service to get some information about the pokemon by providing the name.
 I used the hexagonal architecture for the project structure to make each component decoupled, easy to test and maintain by putting the business logic in the domain.
 
+![Hexagonal architecture](/images/hexagonal.png)
+
+- **Domain logic**: Represents the task that the application should perform, abstracting any interaction with the external world.
+- **Ports**: Provide a way for the primary actors (on the left) to interact with the application, via the domain logic. The domain logic also uses ports for interacting with secondary actors (on the right) when needed.
+- **Adapters**: A design pattern for transforming one interface into another interface. They wrap the logic for interacting with a primary or secondary actor.
+- **Primary** actors: Users of the system such as a webhook, a UI request, or a test script.
+Secondary actors: used by the application, these services are either a Repository (for example, a database) or a Recipient (such as a message queue).
+
+
+Source [here](https://aws.amazon.com/it/blogs/compute/developing-evolutionary-architecture-with-aws-lambda/)
+
 ## How to run
 
 The are 2 options to run the project:
